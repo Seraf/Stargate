@@ -14,8 +14,7 @@
  */
 angular.module( 'Stargate.core', [
   'ui.state',
-  'http-auth-interceptor',
-  'ngCookies'
+  'security'
 ])
 
 /**
@@ -23,53 +22,34 @@ angular.module( 'Stargate.core', [
  * will handle ensuring they are all available at run-time, but splitting it
  * this way makes each module more "self-contained".
  */
-.config(function config( $stateProvider ) {
-  $stateProvider.state( 'login', {
-    url: '/login',
-    views: {
-      "main": {
-        controller: 'LoginCtrl',
-        templateUrl: 'core/views/login.tpl.html'
-      }
-    },
-    data:{ pageTitle: 'Login' }
-  });
-})
 
-/**
- * And of course we define a controller for our route.
- */
-.controller( 'LoginCtrl', function LoginController ($scope, $http, authService, $cookieStore) {
-    $scope.login = function() {
-      $http.post(
-        'http://192.168.1.22:8000/api/v1/user/login/',
-        JSON.stringify({ username: $scope.username, password: $scope.password })
-      ).success(
-        function(data) {
-          //problem creating cookie
-          $cookieStore.put('username', data.username);
-          $cookieStore.put('key', data.key);
-          $http.defaults.headers.common['Authorization'] = 'ApiKey ' +
-            data.username + ':' + data.key;
-          authService.loginConfirmed();
-        }
-      ).error(
-        function(data) {
-          $scope.errorMsg = data.reason;
-        }
-      );
-    };
-    $scope.logout = function() {
-      $http.post('http://192.168.1.22:8000/api/v1/user/logout/').success(function() {
-        $scope.restrictedContent = [];
-        $cookieStore.put('key', null);
-        $http.defaults.headers.common['Authorization'] = null;
-      }).error(function() {
-        // This should happen after the .post call either way.
-        $cookieStore.put('key', null);
-        $http.defaults.headers.common['Authorization'] = null;
-      });
-    };
+
+.controller( 'MenuCtrl', function LoginController ($scope) {
+    $scope.oneAtATime = true;
+
+    $scope.groups = [
+      {
+        title: "Dashboard",
+        url: "#/dashboard",
+        icon: "icon-dashboard"
+      },
+      {
+        title: "Tickets",
+        content: [
+          {"title": "Actions", "url": "#/actions", "icon": "icon-hand-up"}
+        ],
+        icon: "icon-link"
+      },
+      {
+        title: "Labs",
+        content: [
+          {"title": "API", "url": "#/api", "icon": "icon-info-sign"},
+          {"title": "Actions", "url": "#/actions", "icon": "icon-th-large"},
+          {"title": "Monitoring", "url": "#/monitoring", "icon": "icon-table"}
+        ],
+        icon: "icon-beaker"
+      }
+    ];
 })
 
 ;

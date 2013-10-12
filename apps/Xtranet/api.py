@@ -2,7 +2,7 @@ from tastypie.authorization import DjangoAuthorization
 from django.contrib.auth.models import User, Group
 from tastypie import fields
 from tastypie.resources import ModelResource
-from tastypie.authentication import ApiKeyAuthentication
+from tastypie.authentication import ApiKeyAuthentication, MultiAuthentication, SessionAuthentication
 from tastypie.models import ApiKey, create_api_key
 from tastypie.utils import trailing_slash
 from tastypie.http import HttpUnauthorized, HttpForbidden
@@ -10,14 +10,13 @@ from django.conf.urls import url
 from django.contrib.auth import authenticate, login, logout
 from django.db import models
 
-
 class GroupResource(ModelResource):
     class Meta:
         queryset = Group.objects.all()
         resource_name = 'group'
         #allowed_methods = ('get','post')
         authorization = DjangoAuthorization()
-        authentication = ApiKeyAuthentication()
+        authentication = MultiAuthentication(SessionAuthentication(), ApiKeyAuthentication())
 
 class UserResource(ModelResource):
     groups = fields.ManyToManyField(GroupResource, 'groups', null=True, full=True)
@@ -27,7 +26,7 @@ class UserResource(ModelResource):
         resource_name = 'user'
         authorization = DjangoAuthorization()
         authentication = ApiKeyAuthentication()
-        excludes = ['username', 'password']
+        excludes = ['password']
 
 
     def dehydrate(self, bundle):
@@ -56,7 +55,6 @@ class UserResource(ModelResource):
         if user:
             if user.is_active:
                 login(request, user)
-
                 try:
                     key = ApiKey.objects.get(user=user)
                 except ApiKey.DoesNotExist:
@@ -67,13 +65,13 @@ class UserResource(ModelResource):
                         },
                         HttpForbidden,
                     )
-
+                user = self.obj_get(self.build_bundle(request=request), username=username)
+                ur_bundle = self.build_bundle(obj=user, request=request)
                 ret = self.create_response(request, {
                     'success': True,
-                    'username': user.username,
+                    'user': self.serialize(None, self.full_dehydrate(ur_bundle), 'application/json'),
                     'key': key.key
                 })
-                #print 5656; import pdb;pdb.set_trace()
                 return ret
             else:
                 return self.create_response(

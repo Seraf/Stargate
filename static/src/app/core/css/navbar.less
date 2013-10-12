@@ -1,0 +1,156 @@
+.navbar-inner &>li &>a,.navbar-inverse &>li &>a,#topbar &>li &>a,#topbar-inner &>li &>a {
+    height: 40px;
+    line-height: 40px;
+    padding: 3px 10px;
+    margin-right: 10px;
+    background: transparent;
+}
+.navbar-inner &>li,.navbar-inverse &>li,#topbar &>li,#topbar-inner &>li {
+    float: left;
+}
+.navbar-inverse {
+    .nav {
+        margin-top: 10px;
+        margin: 0 10px 0 0;
+        position: relative;
+        left: 0;
+        display: block;
+        & > li {
+            & > a {
+                background: rgba(0,0,0,0.5);
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                -ms-border-radius: 4px;
+                -o-border-radius: 4px;
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.15);
+                -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.15);
+                box-shadow: inset 0 1px 2px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.15);
+                height: 20px;
+                line-height: 20px;
+                padding: 3px 10px;
+                margin-right: 10px;
+            }
+        }
+        & > li.active {
+            & > a {
+                -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.15);
+                -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.15);
+                box-shadow: inset 0 1px 2px rgba(0,0,0,0.1),0 1px 0 rgba(255,255,255,0.15);
+            }
+        }
+        & > .dropdown {
+            & > .caret {
+                border-top: 4px solid #000000;
+                border-right: 4px solid transparent;
+                border-left: 4px solid transparent;
+                border-top-color: #999999;
+                border-bottom-color: #999999;
+            }
+        }
+    }
+    .navbar-search {
+        margin-top: 10px;
+        float: right;
+        .search-query {
+            background: rgba(35,43,48,0.83);
+        }
+        & > i {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
+    }
+    .full {
+        margin:0 0 0 10px;
+        & > li {
+            & > a {
+                -moz-border-radius:0;
+                -moz-box-shadow:none;
+                -ms-border-radius:0;
+                -o-border-radius:0;
+                -webkit-border-radius:0;
+                -webkit-box-shadow:none;
+                background:transparent;
+                border-radius:0;
+                box-shadow:none;
+                height:40px;
+                line-height:40px;
+                margin-right:10px;
+                padding:3px 10px;
+                img {
+                    height:32px;
+                    width:32px;
+                }
+            }
+            & > a:hover {
+                background:transparent;
+            }
+        }
+    }
+}
+.navbar,.navbar-inner {
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+.navbar-inner,.navbar-inverse,#topbar,#topbar-inner {
+    border-bottom: 1px solid rgba(10, 13, 14, 0.8);
+    background: #11161a;
+    background-size: 100%;
+}
+.navbar-inverse .nav .active &>a, .navbar-inverse .nav .active &>a:hover, .navbar-inverse .nav .active &>a:focus {
+    color: white;
+    background-color: #111111;
+}
+.navbar .nav &>.active &>a, .navbar .nav &>.active &>a:hover, .navbar .nav &>.active &>a:focus {
+    text-decoration: none;
+}
+.navbar-inverse .brand, .navbar-inverse .nav &>li &>a {
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+}
+
+.menu-avatar
+{
+	height:32px;
+	margin-right:10px;
+	width:32px;
+}
+
+.user-avatar {
+    position:relative;
+    width:100%;
+    a {
+        display:inline-block;
+        img {
+            -moz-border-radius:2px;
+            -moz-box-shadow:0 1px 3px #1e1e1e;
+            -ms-border-radius:2px;
+            -o-border-radius:2px;
+            -webkit-border-radius:2px;
+            -webkit-box-shadow:0 1px 3px #1e1e1e;
+            border-radius:2px;
+            box-shadow:0 1px 3px #1e1e1e;
+        }
+        & > span {
+            position:relative;
+        }
+    }
+    .dropdown-menu {
+        margin-top:4px;
+        .with-image {
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .avatar {
+            img {
+                border-radius:50%;
+            }
+        }
+    }
+    .dropdown-toggle {
+        span {
+            font-weight:600;
+        }
+    }
+}
