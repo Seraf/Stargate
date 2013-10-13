@@ -6,7 +6,6 @@ angular.module('security.service', [
 
 .factory('security', ['$http', '$q', '$location', 'securityRetryQueue', function($http, $q, $location, queue, Restangular, $cookieStore) {
 
-  console.log($cookieStore.get('test'));
   // Redirect to the given url (defaults to '/')
   function redirect(url) {
     url = url || '/dashboard';
@@ -36,9 +35,9 @@ angular.module('security.service', [
         function(data) {
           user = JSON.parse(data.user);
           service.currentUser = user;
-          console.log($cookieStore);
-          $cookieStore.put('username', user.username);
-          $cookieStore.put('key', data.key);
+          service.cookieStore.put('username', user.username);
+          service.cookieStore.put('key', data.key);
+          service.cookieStore.put('user', service.currentUser);
           $http.defaults.headers.common['Authorization'] = 'ApiKey ' +
             user.username + ':' + data.key;
           if ( service.isAuthenticated() ) {
@@ -63,6 +62,9 @@ angular.module('security.service', [
       if ( service.isAuthenticated() ) {
         return $q.when(service.currentUser);
       } else {
+        $http.defaults.headers.post['Authorization'] = 'ApiKey ' +
+            service.cookieStore.get('username') + ':' + service.cookieStore.get('key');
+        service.currentUser = service.cookieStore.get('user');
         return service.currentUser;
       }
     },

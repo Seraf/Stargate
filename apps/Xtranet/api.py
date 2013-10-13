@@ -28,7 +28,6 @@ class UserResource(ModelResource):
         authentication = ApiKeyAuthentication()
         excludes = ['password']
 
-
     def dehydrate(self, bundle):
         bundle.data['username'] = bundle.obj.username
         return bundle

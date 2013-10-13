@@ -17,13 +17,13 @@ angular.module( 'Stargate', [
   $urlRouterProvider.otherwise( '/dashboard' );
 })
 
-.run( function($http, security, $cookieStore) {
+.run( ['$http', '$cookieStore', 'security', function($http, $cookieStore, security) {
   // Get the current user when the application starts
   // (in case they are still logged in from a previous session)
-  //security.requestCurrentUser();
-  $http.defaults.headers.post['Authorization'] = 'ApiKey ' +
-    $cookieStore.get('username') + ':' + $cookieStore.get('key');
-})
+  security.cookieStore = $cookieStore;
+  security.requestCurrentUser();
+
+}])
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, security ) {
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
