@@ -1,5 +1,5 @@
 angular.module( 'Stargate.about', [
-  'ui.state',
+  'ui.router',
   'placeholders',
   'ui.bootstrap'
 ])

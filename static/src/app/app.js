@@ -5,16 +5,21 @@ angular.module( 'Stargate', [
   'Stargate.about',
   'Stargate.core',
   'Stargate.dashboard',
-  'ui.state',
-  'ui.route',
+  'ui.router',
   'ui.bootstrap',
   'restangular',
   'security',
-  'ngCookies'
+  'ngCookies',
+  'chieffancypants.loadingBar',
+  'ngAnimate'
 ])
 
 .config( function StargateConfig ( $stateProvider, $urlRouterProvider ) {
   $urlRouterProvider.otherwise( '/dashboard' );
+})
+
+.config(function(cfpLoadingBarProvider) {
+  cfpLoadingBarProvider.includeSpinner = false;
 })
 
 .run( ['$http', '$cookieStore', 'security', function($http, $cookieStore, security) {

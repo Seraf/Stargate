@@ -54,6 +54,9 @@ angular.module('security.service', [
     // Logout the current user and redirect
     logout: function(redirectTo) {
       service.currentUser = null;
+      service.cookieStore.remove('username');
+      service.cookieStore.remove('user');
+      service.cookieStore.remove('key');
       redirect('/login');
     },
 

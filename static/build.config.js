@@ -69,7 +69,9 @@ module.exports = {
       'vendor/angular-ui-utils/modules/route/route.js',
       'vendor/angular-cookies/angular-cookies.js',
       'vendor/restangular/dist/restangular.min.js',
-      'vendor/lodash/dist/lodash.min.js'
+      'vendor/lodash/dist/lodash.min.js',
+      'vendor/angular-loading-bar/build/loading-bar.min.js',
+      'vendor/angular-animate/angular-animate.js'
     ],
     css: [
     ],

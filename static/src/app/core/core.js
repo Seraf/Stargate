@@ -13,7 +13,7 @@
  * specified, as shown below.
  */
 angular.module( 'Stargate.core', [
-  'ui.state',
+  'ui.router',
   'security'
 ])
 

@@ -1,5 +1,5 @@
 angular.module( 'Stargate.dashboard', [
-  'ui.state',
+  'ui.router',
   'placeholders',
   'ui.bootstrap',
   'security.authorization'

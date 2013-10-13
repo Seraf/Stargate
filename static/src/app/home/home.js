@@ -13,7 +13,7 @@
  * specified, as shown below.
  */
 angular.module( 'Stargate.home', [
-  'ui.state'
+  'ui.router'
 ])
 
 /**

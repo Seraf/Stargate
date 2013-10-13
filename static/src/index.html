@@ -68,9 +68,9 @@
       </div>
     </div>
   </div>
-  <div class="sidebar" ng-controller="MenuCtrl">
+  <div class="sidebar" ng-controller="MenuCtrl" id="sidebar">
     <accordion close-others="oneAtATime" class="nav" ng-show="security.isAuthenticated()">
-      <accordion-group ng-repeat="group in groups" class="sidebar-groupdiv" ng-class="{true:'active', false:''}[isOpen]">
+      <accordion-group ng-repeat="group in groups" ng-class="{true:'active', false:''}[isOpen]">
         <accordion-heading class="sidebar-titlediv">
           <span class="glow"></span>
           <a href="{{ group.url }}">
