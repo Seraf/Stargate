@@ -31,13 +31,12 @@ angular.module( 'Stargate', [
 }])
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, security ) {
-  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+  $scope.$on('$stateChangeSuccess', function(event, toState){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | Stargate' ;
     }
   });
   $scope.security = security;
-
 })
 
 ;

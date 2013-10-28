@@ -1,12 +1,24 @@
-/*
-  Main html
-*/
+/* ATTN: This is mobile first CSS - to update 786px and up screen width use the media query near the bottom of the document! */
+
+/* Global Styles */
+
 body {
-    background-color: #ECECEC;
-    font: 400 12px 'Open Sans',HelveticaNeue,Helvetica,Arial;
-    color: #707070;
-    min-height: 100%;
-    overflow-x: hidden;
+  background-color: #ECECEC;
+  font: 400 12px 'Open Sans',HelveticaNeue,Helvetica,Arial;
+  color: #707070;
+  min-height: 100%;
+  overflow-x: hidden;
+  margin-top: 50px;
+}
+
+
+#topbar {
+  z-index: 10;
+}
+
+/* Edit Below to Customize Widths > 768px */
+@media (min-width:768px) {
+
 }
 
 /*
@@ -90,6 +102,56 @@ hr.divider, li.divider {
     background: linear-gradient(left,rgba(205,205,205,0),#cdcdcd,rgba(205,205,205,0));
     position: relative;
 }
+
+/*
+  Loading Bar
+*/
+#loading-bar.ng-enter,
+#loading-bar.ng-leave.ng-leave-active,
+#loading-bar-spinner.ng-enter,
+#loading-bar-spinner.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+#loading-bar.ng-enter.ng-enter-active,
+#loading-bar.ng-leave,
+#loading-bar-spinner.ng-enter.ng-enter-active,
+#loading-bar-spinner.ng-leave {
+  opacity: 1;
+}
+
+#loading-bar .bar {
+  -webkit-transition: width 500ms;
+  -moz-transition: width 500ms;
+  -o-transition: width 500ms;
+  transition: width 500ms;
+
+  background: #7bc8d7;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+/* Fancy blur effect */
+#loading-bar .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  opacity: 1.0;
+
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -moz-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  -o-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
 
 /*
   Boxes inside main-content

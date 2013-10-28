@@ -10,11 +10,11 @@
 }
 .navbar-inverse {
     .nav {
-        margin-top: 10px;
+/*        margin-top: 10px;
         margin: 0 10px 0 0;
         position: relative;
         left: 0;
-        display: block;
+        display: block;*/
         & > li {
             & > a {
                 background: rgba(0,0,0,0.5);
@@ -153,4 +153,41 @@
             font-weight:600;
         }
     }
+}
+
+.navbar-header:before,
+.navbar-header:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.navbar-header:after {
+  clear: both;
+}
+.navbar-header:before,
+.navbar-header:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.navbar-header:after {
+  clear: both;
+}
+@media (min-width: 768px) {
+  .navbar-header {
+    float: left;
+    z-index: 10;
+    position: relative;
+    margin-left: 15px;
+  }
+}
+
+#topmenu {
+  margin-top: 10px;
 }

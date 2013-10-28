@@ -3,6 +3,10 @@
 
 <html ng-app="Stargate" ng-controller="AppCtrl" xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Julien Syx">
     <title ng-bind="Stargate"></title>
     <!-- font awesome from BootstrapCDN -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -14,103 +18,113 @@
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
   </head>
 <body>
-  <div class="navbar navbar-top navbar-inverse" id="topbar">
-    <div class="navbar-inner" id="topbar-inner">
-      <div class=" container-fluid">
-        <a class="brand" href="#">Stargate</a>
-        <ul class="nav pull-right"></ul>
-        <div class="nav-collapse nav-collapse-top collapse" ng-show="security.isAuthenticated()">
-          <ul class="nav full pull-right">
-            <li class="dropdown user-avatar">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                 <span>
-                   <img class="menu-avatar" ph-img="50x50" src="" />
-                   <span>{{ security.currentUser.first_name }} {{ security.currentUser.last_name }}</span>
-                 </span>
-               </a>
-              <ul class="dropdown-menu">
-                <li class="with-image">
-                  <div class="avatar"><img src="" ph-img="100x100" /></div>
-                  <span>{{ security.currentUser.first_name }} {{ security.currentUser.last_name }}</span>
+  <div id="wrapper">
+      <!-- Sidebar -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="brand" href="">Stargate</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div>
+          <div class="sidebar" ng-controller="MenuCtrl" id="sidebar">
+            <accordion close-others="oneAtATime" ng-show="security.isAuthenticated()">
+              <accordion-group ng-repeat="group in groups" ng-class="{true:'active', false:''}[isOpen]">
+                <accordion-heading class="sidebar-titlediv">
+                  <span class="glow"></span>
+                  <a href="{{ group.url }}">
+                    <i class="{{ group.icon }} icon-2x"></i>
+                    <span>{{group.title}}</span>
+                    <i class="icon-caret-down" ng-hide="group.url"></i>
+                  </a>
+                </accordion-heading>
+                <ul ng-hide="group.url" class="sidebar-subcontentlist">
+                  <li ng-repeat="item in group.content" ng-class="{active:$uiRoute}" class="sidebar-subcontentlink">
+                    <a href="{{ item.url }}">
+                      <i class="{{ item.icon }}"></i>
+                      <span>{{item.title}}</span>
+                    </a>
+                  </li>
+                </ul>
+              </accordion-group>
+            </accordion>
+          </div>
+          <div class="navbar navbar-top navbar-inverse pull-right" id="topbar">
+            <div class="navbar-inner nav navbar-nav" id="topbar-inner">
+              <div class=" container-fluid">
+                <div class="nav-collapse nav-collapse-top collapse" ng-show="security.isAuthenticated()">
+                  <ul class="nav full pull-right">
+                <li class="dropdown user-avatar">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                     <span>
+                       <img class="menu-avatar" ph-img="50x50" src="" />
+                       <span>{{ security.currentUser.first_name }} {{ security.currentUser.last_name }}</span>
+                     </span>
+                   </a>
+                  <ul class="dropdown-menu">
+                    <li class="with-image">
+                      <div class="avatar"><img src="" ph-img="100x100" /></div>
+                      <span>{{ security.currentUser.first_name }} {{ security.currentUser.last_name }}</span>
+                    </li>
+                    <li><a href="#/profile"><span>Profile</span></a></li>
+                    <li><a href="#/logout" ng-click="security.logout()"><span>Logout</span></a></li>
+                  </ul>
                 </li>
-                <li><a href="#/profile"><span>Profile</span></a></li>
-                <li><a href="#/logout" ng-click="security.logout()"><span>Logout</span></a></li>
               </ul>
-            </li>
-          </ul>
 
-          <form class="navbar-search pull-right">
-            <input type="text" class="search-query animated" placeholder="Search" />
-            <i class="icon-search"></i>
-          </form>
+                  <form class="navbar-search pull-right">
+                <input type="text" class="search-query animated" placeholder="Search" />
+                <i class="icon-search"></i>
+              </form>
 
-          <ul class="nav pull-right">
-            <li ui-route="/about" ng-class="{active:$uiRoute}"><a href=
-            "#/about">About</a></li>
+                  <ul class="nav pull-right" id="topmenu">
+                <li ui-route="/about" ng-class="{active:$uiRoute}"><a href=
+                "#/about">About</a></li>
 
-            <li ui-route="/login" ng-class="{active:$uiRoute}"><a href=
-            "#/login">Login</a></li>
+                <li ui-route="/login" ng-class="{active:$uiRoute}"><a href=
+                "#/login">Login</a></li>
 
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
 
-                <li><a href="#">Another action</a></li>
+                    <li><a href="#">Another action</a></li>
 
-                <li><a href="#">Some link</a></li>
+                    <li><a href="#">Some link</a></li>
 
-                <li><a href="#">One more separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
               </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="sidebar" ng-controller="MenuCtrl" id="sidebar">
-    <accordion close-others="oneAtATime" class="nav" ng-show="security.isAuthenticated()">
-      <accordion-group ng-repeat="group in groups" ng-class="{true:'active', false:''}[isOpen]">
-        <accordion-heading class="sidebar-titlediv">
-          <span class="glow"></span>
-          <a href="{{ group.url }}">
-            <i class="{{ group.icon }} icon-2x"></i>
-            <span>{{group.title}}</span>
-            <i class="icon-caret-down" ng-hide="group.url"></i>
-          </a>
-        </accordion-heading>
-        <ul ng-hide="group.url" class="sidebar-subcontentlist">
-          <li ng-repeat="item in group.content" ng-class="{active:$uiRoute}" class="sidebar-subcontentlink">
-            <a href="{{ item.url }}">
-              <i class="{{ item.icon }}"></i>
-              <span>{{item.title}}</span>
-            </a>
-          </li>
-        </ul>
-      </accordion-group>
-    </accordion>
-  </div>
-  <div class="main-content" ui-view="main">
-    <div class="container-fluid row-fluid area-top clearfix">
-      <div class="pull-left header">
-        <h3 class="title">Dashboard</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.navbar-collapse -->
+      </nav>
 
-        <h5>A subtitle can be added here</h5>
-      </div>
-    </div>
+      <div class="main-content" ui-view="main" id="page-wrapper">
+        <div class="container-fluid row-fluid area-top clearfix">
+          <div class="pull-left header">
+            <h3 class="title">Dashboard</h3>
 
-    <div class="container-fluid padded row-fluid">
-      <!-- Breadcrumb line -->
-
-      <div id="breadcrumbs">
-        <div class="breadcrumb-button blue">
-          <span class="breadcrumb-label">Home</span>
+            <h5>A subtitle can be added here</h5>
+          </div>
         </div>
 
-        <div class="breadcrumb-button">
-          <span class="breadcrumb-label">Dashboard</span>
+        <div class="container-fluid padded row-fluid">
+          <div id="breadcrumbs">
+            <div class="breadcrumb-button blue">
+              <span class="breadcrumb-label">Home</span>
+            </div>
+
+            <div class="breadcrumb-button">
+              <span class="breadcrumb-label">Dashboard</span>
+            </div>
+          </div>
         </div>
-      </div>
     </div>
   </div>
 </body>
